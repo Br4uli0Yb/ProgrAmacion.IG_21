@@ -1,0 +1,350 @@
+---
+title: "Desarrollo del proyecto"
+author: "Marko Rodriguez Conde, Emanuel Rodriguez Chapoñan, Braulio Yucra"
+date: "17/11/2021"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 7.1 PARTE 1
+## 01.A.Calcula los valores numéricos aproximados de:
+```{r}
+(0.3*0.15)/(0.3*0.15+0.2*0.8+0.5*0.12)
+```
+
+## 01.B
+```{r}
+(5^6) * (exp(-5))/factorial(6)
+
+```
+
+## 01.C
+```{r}
+0.4^(7) * 0.6^(13) * factorial(20)/(factorial(7)*factorial(13))
+```
+
+## 02.A.Realizar la siguiente suma: 
+```{r}
+x <-c(1:1000)
+sum(x)
+```
+
+## 02.B.
+```{r}
+m <-c(0:10)
+sum(2^m)
+```
+
+###3. 
+```{r}
+Datos_01<- load("C:/Users/BRAULIO/Desktop/ei1012-1516-la-s1-datos (1).RData")
+Datos_01
+
+grupo
+nota
+```
+
+## 03.A.¿Cuántos elementos tiene?
+```{r}
+length(grupo)
+```
+
+## 03.B.¿En qué posiciones del vector está la letra “A"?
+```{r}
+which(grupo== "A")
+```
+
+## 04.A.¿Cuanto suman todas las notas?
+```{r}
+sum(nota)
+```
+
+## 04.B.¿Cual es la media aritmética de todas las notas?
+```{r}
+mean(nota)
+```
+
+## 04.C.¿En qué posiciones están las notas mayores de 7.0?
+```{r}
+which(7.0 < nota)
+```
+
+## 04.D.Visualiza las notas ordenadas de mayor a menor
+```{r}
+sort(nota,decreasing = TRUE)
+```
+
+## 04.E.¿En qué posición está la nota máxima?
+```{r}
+which(nota == max(nota))
+```
+
+## 05.A.Suma las notas de los 10 primeros alumnos del vector
+```{r}
+data3 <- data.frame(grupo, nota)
+head(data3,10)
+sum(head(nota,10))
+```
+
+## 05.B.¿Cuántos alumnos hay del grupo C?
+```{r}
+GRUPO_C <- which(grupo== "C")
+length(GRUPO_C)
+```
+
+## 05.C.¿Cuántos alumnos han aprobado?
+```{r}
+which(nota > 5.0)
+length(which(nota > 5.0))
+```
+
+## 05.D.¿Cuántos alumnos del grupo B han aprobado?
+```{r}
+GRUPO_B <- which(grupo== "B" & nota >5)
+length(GRUPO_B)
+```
+
+## 05.E.¿Qué porcentaje de alumnos del grupo C han aprobado?
+```{r}
+which(grupo== "C" & nota >5)
+length(GRUPO_C)
+(100*22)/39
+```
+
+## 05.F.¿De qué grupos son la máxima y mínima notas de toda la muestra?
+```{r}
+which.max(nota)
+which.min(nota)
+nota[120]
+nota[142]
+grupo[120]
+grupo[142]
+```
+
+## 05.G.Nota media de los alumnos de grupo A y B, juntos, considerando sólo a los que han aprobado.
+```{r}
+which(data3$grupo=="A"&data3$nota>5)
+which(data3$grupo=="B"&data3$nota>5)
+notas_AB<-nota[c(2,17,28,108,13,18,65,86,103,148,170,186,187)]
+mean(notas_AB)
+```
+
+## 06. Calcula el percentil 66 de las notas de todos los alumnos, y también de los alumnos del grupo C.
+```{r}
+66*length(nota)/100
+nota_ordenada<-sort(nota)
+nota_ordenada[126]
+nota_ordenada[127]
+```
+
+## 07. Un alumno tiene una nota de 4.9. ¿Qué porcentaje, del total de alumnos, tiene una nota menor o igual que la suya? ¿Y qué porcentaje tiene una nota mayor o igual que la suya?
+```{r}
+length(which(nota<=4.9))/length(nota)*100
+length(which(nota>=4.9))/length(nota)*100
+which(nota==4.9)
+```
+
+## 08. Realiza el gráfico de diagramas de caja de las notas de cada grupo, para poder comparar el nivel de cada uno de ellos.
+```{r}
+w <- data.frame(grupo, nota)
+datA <- nota[w$grupo == "A"]
+datB <- nota[w$grupo == "B"]
+datC <- nota[w$grupo == "C"]
+datD <- nota[w$grupo == "D"]
+datE <- nota[w$grupo == "E"]
+boxplot(datA, datB, datC, datD, datE)
+```
+
+## 09.A.¿Cuál ha sido la concentración máxima?
+```{r}
+max(conc)
+```
+
+## 09.B.¿En cuántos de los muestreos se ha superado la concentración de 40.0 ppm?
+```{r}
+length(which(conc> 40.0))
+```
+
+## 09.C.¿Cuál ha sido la concentración media del día?
+```{r}
+mean(conc)
+```
+
+## 09.D.¿Cuáles fueron las 10 mediciones más bajas del día?
+```{r}
+head(sort(conc),10)
+```
+
+## 09.E.Si la primera medida fue a las 00:00. ¿A qué hora del día se alcanzó la concentración máxima?
+```{r}
+max(conc)
+which(conc==max(conc))
+288/(24*60)
+(83-8)/90*60
+ #11.50 min
+```
+
+## 7.2 PARTE 2
+## 01.A.Graficar los puntos en un plano utilizando RStudio.
+```{r}
+x<-1:10
+y<-x^2
+plot(x,y)
+```
+
+## 02.A.Ingresar la matriz A en RStudio.
+```{r}
+matrix(c(1,2,3,2,4,6,3,6,9,4,8,12),nrow = 4,ncol = 3,byrow = TRUE)
+```
+
+## 03.A.Ingresar la matriz identidad de tamaño 3.
+```{r}
+diag(3)
+```
+
+## 04.A. Crea una función que cree una matriz nula ingresando las dimensiones.
+```{r}
+MN<-function(n){I<-diag(n);for(i in 1:n){I[i,i]=0};return(I)}
+MN(4)
+```
+
+## 05.A. Modificar la matriz diag(4), para que se parezca a la matriz B.
+```{r}
+B<-diag(4)
+B[1,1]=0
+B[2,2]=2
+B[3,3]=3
+B[4,4]=4
+B
+```
+
+## 06.A.Obtener la matriz transpuesta de A (ejercicio 2).
+```{r}
+A<-matrix(c(1,2,3,4,2,4,6,8,3,6,9,12), nrow = 4 , ncol = 3)
+t(A)
+```
+
+## 07.A.Realizar las siguientes operaciones A+B,A−B,3B y AB.
+```{r}
+A<-matrix(c(1,2,3,4,2,4,6,8,3,6,9,12,0,0,0,0),nrow = 4,ncol = 4)
+B<-matrix(c(0,0,0,0,2,0,0,0,0,3,0,0,0,0,0,4),ncol = 4)
+A+B
+A-B
+A*B
+3*B
+```
+
+## 08.A.Crea una función para calcular P^6.
+```{r}
+PM<-function(M,n){S=M;for(i in 2:n){S=S%*%M};print(S)}
+P<-matrix(c(1,-2,1,2,4,0,3,-2,1),ncol = 3,nrow = 3)
+PM(P,6)
+```
+
+## 09.A.Resolver el sistema de ecuaciones.
+```{r}
+A=matrix(c(3,9,3,-1,-2,1,1,1,-2),ncol = 3,nrow = 3)
+x<-c(-1,-9,-9)
+solve(A,x)
+```
+
+## 10.A.Utilizando la ayuda de R, investigue para qué sirven las funciones eigen() y det()
+```{r}
+
+```
+
+## 11.A.Considerando las matrices,calcular A.B-AB^t
+```{r}
+M1<-c(1:10)
+M2<-seq(2,20,by=2)
+M3<-seq(3,30,by=3)
+M4<-seq(4,40,by=4)
+M5<-seq(5,50,by=5)
+B=cbind(M1,M2,M3,M4,M5)
+B
+N1<-c(0,1,0,0,1)
+N2<-c(1,0,1,1,0)
+N3<-c(0,1,0,0,1)
+N4<-c(1,0,1,0,1)
+N5<-c(0,1,0,1,0)
+A=cbind(N1,N2,N3,N4,N5)
+A
+B%*%A-B%*%t(A)
+```
+
+## 12.A.Determine la matriz β, β=(X^t.X)^-1.X^t.Y
+```{r}
+x<-matrix(c(1,1,1,1,1,1,-1,0,1,2),ncol = 2,)
+x
+y<-matrix(c(0,0,1,1,3))
+y
+X1<-t(x)%*%x
+X1
+solve(X1) %*% t(x) %*% y
+```
+
+## 13.Corre el siguiente código para cargar los vectores year y co2 en memoria
+```{r}
+data(co2)
+means=aggregate(co2,FUN=mean)
+year=as.vector(time(means))
+co2=as.vector(means)
+```
+
+## 13.A.El vector co2 contiene medidas de CO2 en la atmósfera,en unidades de ppm, durante el periodo 1959-1997. El vector year contiene sus años correspondientes.
+```{r}
+co2
+year
+```
+
+## 13.B.Calcular un vector de diferencias de CO2 entre años consecutivos, que sería:
+```{r}
+diff(co2)
+c(0,diff(co2))
+y<-c(0,diff(co2))
+y
+```
+
+## 13.C.Crear un plot con lineas y puntos mostrando las diferencias consecutivas de CO2 en función del tiempo (1960, 1961, etc…).
+```{r}
+plot(year,y,type="o",pch=20,xlab = "Años",ylab="Diferencia de concentración de co2",main="Diferencias de co2 entre años consecutivos",col="light blue",font=2)
+```
+
+## 13.D.La diferencia de concentración de CO2 entre 2020 y 2019 fue igual a 2.64. Agregar un punto rojo representando esa diferencia al plot ya creado (usar una forma diferente, como pch=4)
+```{r}
+plot(year,y,xlim=c(1959,2020),type="o",pch=4,xlab="Años",ylab="DIferencia de concentración de co2", main="Diferencias de CO2 entre años consecutivos",col="red",font=2)
+```
+
+## 14.A.Lee el archivo rainfall.csv como un data.frame.
+```{r}
+rainfalldf<-read.csv("C:/Users/BRAULIO/Desktop/rainfall.csv")
+rainfalldf
+```
+
+## 14.B.Calcula e imprime un vector con los nombres de las estaciones donde al menos uno de los meses tiene una precipitación superior a 180mm.
+```{r}
+rainfalldf[(rainfalldf$dec > 180),]
+rain180<-rainfalldf[(rainfalldf$sep>180)|(rainfalldf$oct>180)|(rainfalldf$nov>180)|(rainfalldf$dec>180)|(rainfalldf$jan>180)|(rainfalldf$feb>180)|(rainfalldf$mar>180)|(rainfalldf$apr>180)|(rainfalldf$may>180),]
+rain180$name
+```
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
